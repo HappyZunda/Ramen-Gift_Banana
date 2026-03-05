@@ -142,7 +142,7 @@ const App = () => {
                   </a>
 
                   <p className="text-[10px] sm:text-[12px] text-orange-800 leading-tight font-bold">
-                    URLが読み込めないときはデフォルトのブラウザで開いてねー<br/>
+                    URLが読み込めないときはデフォルトのブラウザで<br/>
                     Gifteeリンクは必ず保存してね
                   </p>
 
