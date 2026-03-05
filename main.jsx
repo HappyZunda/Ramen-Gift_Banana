@@ -108,7 +108,7 @@ const App = () => {
                 <div className="w-14 h-1 bg-red-600 mx-auto my-3 opacity-30 rounded-full"></div>
                 
                 <p className="text-[14px] sm:text-[18px] text-gray-800 mb-3 font-bold leading-tight italic">
-                  「試験応援してるよ！<br />マシマシのらーめんで元気つけてねーええなあ🚢✨」
+                  「試験応援してるよ！<br />マシマシのらーめんで元気つけてねー<br />ええなあ🚢✨」
                 </p>
                 
                 <p className="text-base sm:text-xl text-red-600 font-black mb-4 animate-bounce">
