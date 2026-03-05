@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import React, { useState } from 'react';
 import { Gift, Utensils, Heart, ExternalLink, Ship, Anchor, Waves, RotateCcw } from 'lucide-react';
 
