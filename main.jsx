@@ -8,7 +8,7 @@ const App = () => {
   const [showSteps, setShowSteps] = useState(false);
 
   // ギフトURLをセット
-  const giftUrl = "https://www.google.com/"; 
+  const giftUrl = "www.yahoo.co.jp/"; 
 
   const handleOpen = () => {
     setIsOpen(true);
