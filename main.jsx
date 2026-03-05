@@ -81,7 +81,7 @@ const App = () => {
               <div>
                 <h1 className="text-2xl sm:text-3xl font-black text-blue-900 mb-2 tracking-tight">ええなあああ</h1>
                 <p className="text-gray-600 leading-relaxed text-[15px] sm:text-lg font-medium">
-                  試験勉強おつかれさま！あと少し！<br />おいしいもの食べて元気だしてね🍜
+                  試験勉強おつかれさま！あと少し！<br />おいしいもの食べて元気だしてねー🍜
                 </p>
               </div>
 
@@ -108,7 +108,7 @@ const App = () => {
                 <div className="w-14 h-1 bg-red-600 mx-auto my-3 opacity-30 rounded-full"></div>
                 
                 <p className="text-[14px] sm:text-[18px] text-gray-800 mb-3 font-bold leading-tight italic">
-                  「試験応援してるよ！<br />温かいラーメンで心も体もホカホカに！🚢✨」
+                  「試験応援してるよ！<br />マシマシのらーめんで元気つけてねーええなあ🚢✨」
                 </p>
                 
                 <p className="text-base sm:text-xl text-red-600 font-black mb-4 animate-bounce">
