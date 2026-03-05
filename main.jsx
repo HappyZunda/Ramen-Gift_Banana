@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Gift, Utensils, Heart, ExternalLink, Ship, Anchor, Waves, RotateCcw, Syringe } from 'lucide-react';
 
@@ -6,9 +6,22 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [showSteps, setShowSteps] = useState(false);
+  
+  // ギフトURLを管理するステート
+  // 初期値としてURLパラメーター "?url=..." をチェックします
+  const [giftUrl, setGiftUrl] = useState("https://www.google.com/"); 
 
-  // ギフトURLをセット
-  const giftUrl = "https://www.yahoo.co.jp/"; 
+  useEffect(() => {
+    // ブラウザのURLからパラメーターを取得
+    const params = new URLSearchParams(window.location.search);
+    const urlParam = params.get('url');
+    
+    // パラメーターが存在すれば、ステートを更新
+    if (urlParam) {
+      // 安全のためデコードされることを期待（ブラウザが自動で行うことが多いです）
+      setGiftUrl(urlParam);
+    }
+  }, []);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -27,13 +40,10 @@ const App = () => {
   return (
     <div className={`h-screen w-full flex flex-col items-center justify-between p-4 font-sans transition-colors duration-1000 overflow-hidden ${isOpen ? 'bg-orange-50' : 'bg-blue-50'}`}>
       
-      {/* 調整用の上部余白 */}
       <div className="flex-grow-0 h-1"></div>
 
-      {/* メインカード */}
       <div className={`max-w-md w-full bg-white rounded-[2.5rem] shadow-2xl overflow-hidden relative border-4 mb-4 transition-all duration-1000 flex flex-col ${isOpen ? 'border-orange-300' : 'border-blue-200'}`}>
         
-        {/* 背景の装飾：ヘッダー部分 */}
         <div className={`shrink-0 w-full h-20 sm:h-28 flex items-center justify-center overflow-hidden transition-colors duration-1000 ${isOpen ? 'bg-red-600' : 'bg-sky-600'}`}>
           <div className="flex space-x-12 opacity-20">
             {[...Array(6)].map((_, i) => (
@@ -42,16 +52,13 @@ const App = () => {
               </div>
             ))}
           </div>
-          {/* 右上のリボン */}
           <div className={`absolute top-4 right-[-35px] font-black py-1 px-12 transform rotate-45 shadow-md text-[10px] sm:text-sm transition-colors duration-500 ${isOpen ? 'bg-yellow-400 text-red-800' : 'bg-white text-blue-800'}`}>
             {isOpen ? '召し上がれ！' : '合格祈願'}
           </div>
         </div>
 
-        {/* コンテンツエリア */}
         <div className="flex-grow overflow-hidden flex flex-col justify-center px-6 py-4 sm:py-6 text-center">
           {!isOpen ? (
-            /* 1ページ目 */
             <div className="space-y-5 sm:space-y-8 animate-in fade-in duration-700">
               <div className="relative inline-block">
                 <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex space-x-2">
@@ -87,7 +94,6 @@ const App = () => {
               </button>
             </div>
           ) : (
-            /* 2ページ目 */
             <div className={`space-y-4 sm:space-y-6 ${showContent ? 'animate-in zoom-in fade-in duration-1000' : 'opacity-0'}`}>
               <div className="relative">
                 <div className="text-6xl sm:text-8xl mb-1 relative z-10 drop-shadow-lg">🍜</div>
@@ -135,7 +141,6 @@ const App = () => {
                     <ExternalLink size={20} />
                   </a>
 
-                  {/* 注意書きの追加 */}
                   <p className="text-[10px] sm:text-[12px] text-orange-800 leading-tight font-bold">
                     URLが読み込めないときはLINEしてねー<br/>
                     Gifteeリンクは必ず保存してね
@@ -151,7 +156,6 @@ const App = () => {
           )}
         </div>
         
-        {/* フッター：ステップ表示 */}
         <div className={`p-3 sm:p-5 shrink-0 border-t transition-colors duration-1000 ${isOpen ? 'bg-orange-100 border-orange-200' : 'bg-sky-50 border-sky-100'}`}>
            <div className="grid grid-cols-6 gap-0.5">
              <div className="flex flex-col items-center relative z-10">
@@ -182,7 +186,6 @@ const App = () => {
         </div>
       </div>
 
-      {/* クレジット */}
       <div className="bg-white/60 backdrop-blur-md px-6 py-2.5 rounded-full border border-gray-100 shadow-md mb-2 shrink-0">
         <p className="text-gray-700 text-[11px] sm:text-[13px] font-bold tracking-wide">
           This page is built by ゆーち with Gemini.
@@ -201,7 +204,6 @@ const App = () => {
 
 export default App;
 
-// マウント処理
 const container = document.getElementById('root');
 if (container) {
   const root = ReactDOM.createRoot(container);
