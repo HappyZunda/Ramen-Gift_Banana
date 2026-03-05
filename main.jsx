@@ -27,18 +27,18 @@ const App = () => {
   return (
     <div className={`h-screen w-full flex flex-col items-center justify-between p-4 font-sans transition-colors duration-1000 overflow-hidden ${isOpen ? 'bg-orange-50' : 'bg-blue-50'}`}>
       
-      {/* 調整用の上部余白（カードを中央やや上に配置） */}
-      <div className="flex-grow-0 h-2"></div>
+      {/* 調整用の上部余白 */}
+      <div className="flex-grow-0 h-1"></div>
 
       {/* メインカード */}
       <div className={`max-w-md w-full bg-white rounded-[2.5rem] shadow-2xl overflow-hidden relative border-4 mb-4 transition-all duration-1000 flex flex-col ${isOpen ? 'border-orange-300' : 'border-blue-200'}`}>
         
-        {/* 背景の装飾：ヘッダー部分（高さを少し戻して余裕を持たせました） */}
-        <div className={`shrink-0 w-full h-24 sm:h-32 flex items-center justify-center overflow-hidden transition-colors duration-1000 ${isOpen ? 'bg-red-600' : 'bg-sky-600'}`}>
+        {/* 背景の装飾：ヘッダー部分 */}
+        <div className={`shrink-0 w-full h-20 sm:h-28 flex items-center justify-center overflow-hidden transition-colors duration-1000 ${isOpen ? 'bg-red-600' : 'bg-sky-600'}`}>
           <div className="flex space-x-12 opacity-20">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="text-white transform -rotate-12">
-                {isOpen ? <Utensils size={40} strokeWidth={3} /> : <Ship size={40} strokeWidth={3} />}
+                {isOpen ? <Utensils size={36} strokeWidth={3} /> : <Ship size={36} strokeWidth={3} />}
               </div>
             ))}
           </div>
@@ -48,11 +48,11 @@ const App = () => {
           </div>
         </div>
 
-        {/* コンテンツエリア（パディングを少し増やして縦長感を調整） */}
-        <div className="flex-grow overflow-hidden flex flex-col justify-center px-6 py-6 sm:py-8 text-center">
+        {/* コンテンツエリア */}
+        <div className="flex-grow overflow-hidden flex flex-col justify-center px-6 py-4 sm:py-6 text-center">
           {!isOpen ? (
             /* 1ページ目 */
-            <div className="space-y-4 sm:space-y-6 animate-in fade-in duration-700">
+            <div className="space-y-5 sm:space-y-8 animate-in fade-in duration-700">
               <div className="relative inline-block">
                 <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex space-x-2">
                   <div className="w-1.5 h-6 bg-blue-200 rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
@@ -61,7 +61,7 @@ const App = () => {
                 </div>
                 
                 <div className="relative cursor-pointer hover:scale-105 transition-transform" onClick={handleOpen}>
-                  <svg viewBox="0 0 200 150" className="w-32 h-32 sm:w-48 sm:h-48 mx-auto drop-shadow-xl">
+                  <svg viewBox="0 0 200 150" className="w-32 h-32 sm:w-44 sm:h-44 mx-auto drop-shadow-xl">
                     <path d="M20 80 Q100 80 180 80 L160 140 Q100 150 40 140 Z" fill="#e11d48" />
                     <path d="M15 75 Q100 20 185 75 Z" fill="#f43f5e" className="animate-pulse" />
                     <rect x="85" y="30" width="30" height="10" rx="5" fill="#be123c" />
@@ -72,17 +72,17 @@ const App = () => {
               </div>
 
               <div>
-                <h1 className="text-xl sm:text-2xl font-black text-blue-900 mb-1 tracking-tight">ええなあああ</h1>
-                <p className="text-gray-600 leading-relaxed text-[12px] sm:text-sm">
+                <h1 className="text-2xl sm:text-3xl font-black text-blue-900 mb-2 tracking-tight">ええなあああ</h1>
+                <p className="text-gray-600 leading-relaxed text-[15px] sm:text-lg font-medium">
                   試験勉強おつかれさま！あと少し！<br />おいしいもの食べて元気だしてね🍜
                 </p>
               </div>
 
               <button 
                 onClick={handleOpen}
-                className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 sm:py-4 rounded-2xl shadow-lg transform active:scale-95 transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
+                className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 sm:py-4 rounded-2xl shadow-lg transform active:scale-95 transition-all flex items-center justify-center space-x-2 text-base sm:text-lg"
               >
-                <Anchor size={18} />
+                <Anchor size={20} />
                 <span>ギフトを開ける</span>
               </button>
             </div>
@@ -90,7 +90,7 @@ const App = () => {
             /* 2ページ目 */
             <div className={`space-y-4 sm:space-y-6 ${showContent ? 'animate-in zoom-in fade-in duration-1000' : 'opacity-0'}`}>
               <div className="relative">
-                <div className="text-6xl sm:text-8xl mb-2 relative z-10 drop-shadow-lg">🍜</div>
+                <div className="text-6xl sm:text-8xl mb-1 relative z-10 drop-shadow-lg">🍜</div>
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 w-full flex justify-around opacity-30">
                   <Waves className="text-orange-500 animate-pulse" />
                   <Waves className="text-red-500 animate-pulse delay-75" />
@@ -98,14 +98,14 @@ const App = () => {
               </div>
 
               <div className="bg-orange-50 p-4 sm:p-6 rounded-3xl border-2 border-dashed border-red-300 relative shadow-inner">
-                <h2 className="text-lg sm:text-2xl font-black text-red-700 leading-tight">栄養バランス満点の<br/>スタミナらーめん</h2>
-                <div className="w-12 h-1 bg-red-600 mx-auto my-3 opacity-30 rounded-full"></div>
+                <h2 className="text-xl sm:text-3xl font-black text-red-700 leading-tight">栄養バランス満点の<br/>スタミナらーめん</h2>
+                <div className="w-14 h-1 bg-red-600 mx-auto my-3 opacity-30 rounded-full"></div>
                 
-                <p className="text-[12px] sm:text-[15px] text-gray-800 mb-3 font-bold leading-tight italic">
+                <p className="text-[14px] sm:text-[18px] text-gray-800 mb-3 font-bold leading-tight italic">
                   「試験応援してるよ！<br />温かいラーメンで心も体もホカホカに！🚢✨」
                 </p>
                 
-                <p className="text-sm sm:text-lg text-red-600 font-black mb-4 animate-bounce">
+                <p className="text-base sm:text-xl text-red-600 font-black mb-4 animate-bounce">
                   終わったら飲みいこうね🍺
                 </p>
                 
@@ -129,11 +129,18 @@ const App = () => {
                     href={giftUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white font-black py-3 sm:py-4 rounded-xl shadow-lg transform hover:scale-[1.02] transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
+                    className="block w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-700 hover:to-orange-600 text-white font-black py-3 sm:py-4 rounded-xl shadow-lg transform hover:scale-[1.02] transition-all flex items-center justify-center space-x-2 text-base sm:text-lg"
                   >
                     <span>ラーメンを受け取る</span>
-                    <ExternalLink size={18} />
+                    <ExternalLink size={20} />
                   </a>
+
+                  {/* 注意書きの追加 */}
+                  <p className="text-[10px] sm:text-[12px] text-orange-800 leading-tight font-bold">
+                    URLが読み込めないときはLINEしてねー<br/>
+                    Gifteeリンクは必ず保存してね
+                  </p>
+
                   <button onClick={handleBack} className="text-orange-700 font-bold py-1 flex items-center justify-center w-full space-x-1 opacity-50 text-[11px] hover:opacity-100 transition-opacity">
                     <RotateCcw size={12} />
                     <span>戻る</span>
@@ -144,7 +151,7 @@ const App = () => {
           )}
         </div>
         
-        {/* フッター：ステップ表示（ここも少し高さを確保） */}
+        {/* フッター：ステップ表示 */}
         <div className={`p-3 sm:p-5 shrink-0 border-t transition-colors duration-1000 ${isOpen ? 'bg-orange-100 border-orange-200' : 'bg-sky-50 border-sky-100'}`}>
            <div className="grid grid-cols-6 gap-0.5">
              <div className="flex flex-col items-center relative z-10">
@@ -175,10 +182,10 @@ const App = () => {
         </div>
       </div>
 
-      {/* クレジット（サイズを少し大きく、余白を調整） */}
-      <div className="bg-white/60 backdrop-blur-md px-6 py-2 rounded-full border border-gray-100 shadow-md mb-2 shrink-0">
-        <p className="text-gray-600 text-[11px] font-bold tracking-wide">
-          This page is made by ゆーち with Gemini.
+      {/* クレジット */}
+      <div className="bg-white/60 backdrop-blur-md px-6 py-2.5 rounded-full border border-gray-100 shadow-md mb-2 shrink-0">
+        <p className="text-gray-700 text-[11px] sm:text-[13px] font-bold tracking-wide">
+          This page is built by ゆーち with Gemini.
         </p>
       </div>
 
