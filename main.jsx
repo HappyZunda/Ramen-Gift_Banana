@@ -1,6 +1,3 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-
 import React, { useState } from 'react';
 import { Gift, Utensils, Heart, ExternalLink, Ship, Anchor, Waves, RotateCcw } from 'lucide-react';
 
@@ -221,10 +218,3 @@ const App = () => {
 };
 
 export default App;
-import ReactDOM from 'react-dom/client'
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
