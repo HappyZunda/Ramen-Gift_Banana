@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom/client';
 import { Gift, Utensils, Heart, ExternalLink, Ship, Anchor, Waves, RotateCcw } from 'lucide-react';
 
 const App = () => {
@@ -100,7 +101,6 @@ const App = () => {
                   温かいラーメンを食べて、心も体もホカホカにしてもう一踏ん張り！🚢✨」
                 </p>
                 
-                {/* 追加メッセージ */}
                 <p className="text-lg text-red-600 font-black mb-6 animate-bounce">
                   試験終わったら飲みいこうね🍺
                 </p>
@@ -131,7 +131,6 @@ const App = () => {
                     <ExternalLink size={20} />
                   </a>
 
-                  {/* リンクに関する注記 */}
                   <p className="text-[10px] text-orange-800 leading-tight">
                     もしうまくリンクが表示されないときは<br/>LINEで教えてください。
                   </p>
@@ -153,7 +152,6 @@ const App = () => {
           )}
         </div>
         
-        {/* フッター：6つのステップ */}
         <div className={`p-4 border-t transition-colors duration-1000 ${isOpen ? 'bg-orange-100 border-orange-200' : 'bg-sky-50 border-sky-100'}`}>
            <div className="grid grid-cols-6 gap-1">
              <div className="flex flex-col items-center">
@@ -200,7 +198,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* 常時表示のクレジット */}
+      {/* クレジット */}
       <div className="bg-white/50 backdrop-blur-sm px-4 py-1.5 rounded-full border border-gray-200 shadow-sm">
         <p className="text-gray-600 text-[10px] sm:text-xs font-semibold tracking-wide">
           This page is made by ゆーち with Gemini.
@@ -218,3 +216,14 @@ const App = () => {
 };
 
 export default App;
+
+// マウント処理（GitHub Pagesなど実際の環境で動かすために必要）
+const container = document.getElementById('root');
+if (container) {
+  const root = ReactDOM.createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}
