@@ -64,7 +64,7 @@ const App = () => {
 
               <div>
                 <h1 className="text-2xl font-black text-blue-900 mb-2 flex items-center justify-center gap-2">
-                   ええなあああ
+                    ええなあああ
                 </h1>
                 <p className="text-gray-600 leading-relaxed text-sm px-4">
                   試験の勉強おつかれさま！<br />
