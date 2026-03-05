@@ -5,19 +5,35 @@ import { Gift, Utensils, Heart, ExternalLink, Ship, Anchor, Waves, RotateCcw, Sy
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [showSteps, setShowSteps] = useState(false); // ステップアニメーション用のステート
 
   // ギフトURLをセット
   const giftUrl = "https://www.google.com/"; 
 
   const handleOpen = () => {
     setIsOpen(true);
-    setTimeout(() => setShowContent(true), 1000);
+    setTimeout(() => {
+      setShowContent(true);
+      // コンテンツ表示の少し後にステップアニメーションを開始
+      setTimeout(() => setShowSteps(true), 500); 
+    }, 1000);
   };
 
   const handleBack = () => {
     setShowContent(false);
     setIsOpen(false);
+    setShowSteps(false); // ステップアニメーションもリセット
   };
+
+  // ステップの定義（マッピング用）
+  const steps = [
+    { id: 'start', iconOpen: '🍲', iconClosed: '🚢', labelOpen: 'START', labelClosed: 'START', color: 'blue', activeColor: 'orange' },
+    { id: 'energy', icon: '🍜', label: 'ENERGY', color: 'sky', activeColor: 'red' },
+    { id: 'exams', icon: '✍️', label: 'EXAMS', color: 'sky', activeColor: 'orange' },
+    { id: '4th', icon: '🎓', label: <>4TH<br/>GRADE</>, color: 'sky', activeColor: 'orange' },
+    { id: '5th', icon: '🏫', label: <>OH,,, <br/>5TH GRADE</>, color: 'sky', activeColor: 'orange' },
+    { id: 'smile', icon: '🍌', label: 'SMILE', color: 'sky', activeColor: 'orange', final: true }
+  ];
 
   return (
     <div className={`h-screen flex flex-col items-center justify-center p-2 font-sans transition-colors duration-1000 overflow-hidden ${isOpen ? 'bg-orange-50' : 'bg-blue-50'}`}>
@@ -150,46 +166,36 @@ const App = () => {
         
         <div className={`p-2 sm:p-4 border-t transition-colors duration-1000 ${isOpen ? 'bg-orange-100 border-orange-200' : 'bg-sky-50 border-sky-100'}`}>
            <div className="grid grid-cols-6 gap-0.5">
-             <div className="flex flex-col items-center">
-               <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm transition-all duration-500 ${!isOpen ? 'ring-2 ring-blue-500 scale-110 shadow-md' : ''}`}>
-                 {isOpen ? '🍲' : '🚢'}
-               </div>
-               <span className={`text-[6px] sm:text-[7px] font-black transition-colors duration-500 ${isOpen ? 'text-orange-600' : 'text-blue-700 scale-105'}`}>START</span>
-             </div>
-             <div className="flex flex-col items-center">
-               <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm transition-all duration-500 ${isOpen ? 'ring-2 ring-red-500 scale-110 shadow-md' : ''}`}>
-                 🍜
-               </div>
-               <span className={`text-[6px] sm:text-[7px] font-black transition-colors duration-500 ${isOpen ? 'text-red-600 scale-105' : 'text-sky-400'}`}>ENERGY</span>
-             </div>
-             <div className="flex flex-col items-center">
-               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm">
-                 ✍️
-               </div>
-               <span className={`text-[6px] sm:text-[7px] font-bold ${isOpen ? 'text-orange-600' : 'text-sky-400'}`}>EXAMS</span>
-             </div>
-             <div className="flex flex-col items-center">
-               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm">
-                 🎓
-               </div>
-               <span className={`text-[6px] sm:text-[7px] font-bold text-center leading-tight ${isOpen ? 'text-orange-600' : 'text-sky-400'}`}>
-                 4TH<br/>GRADE
-               </span>
-             </div>
-             <div className="flex flex-col items-center">
-               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm">
-                 🏫
-               </div>
-               <span className={`text-[6px] sm:text-[7px] font-bold text-center leading-tight ${isOpen ? 'text-orange-600' : 'text-sky-400'}`}>
-                 OH,,, <br/>5TH GRADE
-               </span>
-             </div>
-             <div className="flex flex-col items-center">
-               <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm transition-all duration-500 ${isOpen && showContent ? 'ring-2 ring-orange-400 scale-110 shadow-md' : ''}`}>
-                 🍌
-               </div>
-               <span className={`text-[6px] sm:text-[7px] font-bold transition-colors duration-500 ${isOpen && showContent ? 'text-orange-700 font-black' : 'text-sky-400'}`}>SMILE</span>
-             </div>
+             {/* ステップをループで表示し、アニメーションを適用 */}
+             {steps.map((step, index) => {
+               // 1つ目のステップは常に表示
+               if (index === 0) {
+                 return (
+                   <div key={step.id} className="flex flex-col items-center z-10 relative">
+                     <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm transition-all duration-500 ${!isOpen ? `ring-2 ring-${step.color}-500 scale-110 shadow-md` : ''}`}>
+                       {isOpen ? step.iconOpen : step.iconClosed}
+                     </div>
+                     <span className={`text-[6px] sm:text-[7px] font-black transition-colors duration-500 ${isOpen ? `text-${step.activeColor}-600` : `text-${step.color}-700 scale-105`}`}>{isOpen ? step.labelOpen : step.labelClosed}</span>
+                   </div>
+                 );
+               }
+               
+               // 2つ目以降のステップにアニメーションを適用
+               return (
+                 <div key={step.id} className={`flex flex-col items-center relative ${showSteps ? 'animate-step-flow' : 'opacity-0'}`} style={{ animationDelay: `${index * 0.15}s` }}>
+                   <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white flex items-center justify-center shadow-sm mb-1 text-[12px] sm:text-sm transition-all duration-500 ${isOpen && step.final && showSteps ? `ring-2 ring-${step.activeColor}-400 scale-110 shadow-md` : ''} ${step.id === 'energy' && isOpen ? `ring-2 ring-${step.activeColor}-500 scale-110 shadow-md` : ''}`}>
+                     {step.icon}
+                   </div>
+                   <span className={`text-[6px] sm:text-[7px] font-bold text-center leading-tight transition-colors duration-500 ${isOpen && step.final && showSteps ? `text-${step.activeColor}-700 font-black` : `text-${step.activeColor}-600`}`}>
+                     {step.label}
+                   </span>
+                   {/* ステップ間の線（任意） */}
+                   {index < steps.length - 1 && showSteps && (
+                      <div className={`absolute top-3 -right-1/2 w-full h-0.5 bg-${step.activeColor}-200 animate-line-flow`} style={{ animationDelay: `${index * 0.15 + 0.1}s` }}></div>
+                   )}
+                 </div>
+               );
+             })}
            </div>
         </div>
       </div>
@@ -205,6 +211,23 @@ const App = () => {
         @keyframes bounce {
           0%, 100% { transform: translateY(0); opacity: 0.3; }
           50% { transform: translateY(-10px); opacity: 0.8; }
+        }
+        /* ステップが流れるアニメーション */
+        @keyframes step-flow {
+          0% { opacity: 0; transform: translateX(-10px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-step-flow {
+          animation: step-flow 0.5s ease-out forwards;
+        }
+        /* ステップ間の線のアニメーション（任意） */
+        @keyframes line-flow {
+            0% { width: 0; opacity: 0; }
+            100% { width: 100%; opacity: 1; }
+        }
+        .animate-line-flow {
+            animation: line-flow 0.3s ease-out forwards;
+            transform-origin: left;
         }
       `}} />
     </div>
